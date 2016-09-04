@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{E9299D84-FD4A-463A-898F-5350E5D5742D}") = "Trivia Game Udemy Unity Training", "Assembly-CSharp.csproj", "{1C398FD6-D905-3DD9-4DA8-110FAE8D823D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C398FD6-D905-3DD9-4DA8-110FAE8D823D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C398FD6-D905-3DD9-4DA8-110FAE8D823D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C398FD6-D905-3DD9-4DA8-110FAE8D823D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C398FD6-D905-3DD9-4DA8-110FAE8D823D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
