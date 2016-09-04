@@ -19,6 +19,7 @@ public class TriviaGameLoop : MonoBehaviour {
 
 	private Question[] questions = new Question[10];
 	private int currentQuestionIndex;
+	private int[] questionNumbersChosen = new int[5];
 	// Use this for initialization
 	void Start () {
 
@@ -59,6 +60,22 @@ public class TriviaGameLoop : MonoBehaviour {
 	}
 
 	void ChooseQuestions(){
+		for (int i = 0; i < questionNumbersChosen.Length; i++) {
+			int questionNum = Random.Range (0, questions.Length);
+			if (NumberNotContained (questionNumbersChosen, questionNum)) {
+				questionNumbersChosen [i] = questionNum;
+			} else {
+				i--;
+			}
+		}
 		currentQuestionIndex = Random.Range (0, questions.Length);
+	}
+
+	bool NumberNotContained(int[] numbers,int num){	
+		for (int i = 0; i < numbers.Length; i++) {
+			if (numbers [i] == num)
+				return false;
+		}
+		return true;
 	}
 }
