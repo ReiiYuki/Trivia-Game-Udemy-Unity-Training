@@ -6,15 +6,17 @@ public class TriviaGameLoop : MonoBehaviour {
 	public struct Question{
 		public string questionText;
 		public string[] answers;
-		public Question(string questionText, string[] answers){
+		public int correctAnswer;
+		public Question(string questionText, string[] answers,int correctAnswer){
 			this.questionText = questionText;
 			this.answers = answers;
+			this.correctAnswer = correctAnswer;
 		}
 	}
-	public Question testQuestion = new Question("What's your favourite color?",new string[]{"blue","red","yellow"});	
+	public Question testQuestion = new Question("What's your favourite color?",new string[]{"blue","red","yellow"},0);	
 	// Use this for initialization
 	void Start () {
-		print (testQuestion.questionText+" "+testQuestion.answers[0]);
+		print (testQuestion.questionText+" "+testQuestion.answers[0]+" "+testQuestion.correctAnswer);
 	}
 	
 	// Update is called once per frame
