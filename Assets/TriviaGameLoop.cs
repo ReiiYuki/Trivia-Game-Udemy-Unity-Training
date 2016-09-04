@@ -21,6 +21,11 @@ public class TriviaGameLoop : MonoBehaviour {
 		AssignQuestion ();
 	}
 
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
 	void AssignQuestion(){
 		questionText.text = currentQuestion.questionText;
 		for (int i = 0; i<answerButtons.Length; i++) {
@@ -28,8 +33,11 @@ public class TriviaGameLoop : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
+	public void checkAnswer(int buttonNum){
+		if (buttonNum == currentQuestion.correctAnswerIndex) {
+			print ("correct");
+		} else {
+			print ("incorrect");
+		}
 	}
 }
