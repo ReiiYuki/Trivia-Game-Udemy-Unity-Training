@@ -8,7 +8,7 @@ public class test : MonoBehaviour {
 	public string name;
 	// Use this for initialization
 	void Start () {
-		print (age +" "+ height +" "+ name); 
+		print (age +" "+ height + " "+ name); 
 	}
 	
 	// Update is called once per frame
