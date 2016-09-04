@@ -20,6 +20,7 @@ public class TriviaGameLoop : MonoBehaviour {
 	private Question[] questions = new Question[10];
 	private int currentQuestionIndex;
 	private int[] questionNumbersChosen = new int[5];
+	private int questionFinished;
 	// Use this for initialization
 	void Start () {
 
@@ -34,9 +35,7 @@ public class TriviaGameLoop : MonoBehaviour {
 		questions [8] = new Question ("ri", new string[]{"ね","ふ","よ","り","ろ" },3);
 		questions [9] = new Question ("ぬ", new string[]{ "nu","me","ha","ni","ko"},0);
 		ChooseQuestions ();
-		currentQuestion = questions [currentQuestionIndex];
-		AssignQuestion ();
-
+		AssignQuestion (questionNumbersChosen[0]);
 	}
 
 	// Update is called once per frame
@@ -44,7 +43,8 @@ public class TriviaGameLoop : MonoBehaviour {
 	
 	}
 
-	void AssignQuestion(){
+	void AssignQuestion(int questionNum){
+		currentQuestion = questions[questionNum];
 		questionText.text = currentQuestion.questionText;
 		for (int i = 0; i<answerButtons.Length; i++) {
 			answerButtons [i].GetComponentInChildren<Text>().text = currentQuestion.answers [i];
@@ -56,6 +56,10 @@ public class TriviaGameLoop : MonoBehaviour {
 			print ("correct");
 		} else {
 			print ("incorrect");
+		}
+		if (questionFinished<questionNumbersChosen.Length-1){
+			moveToNextQuestion();
+			questionFinished++;
 		}
 	}
 
@@ -77,5 +81,9 @@ public class TriviaGameLoop : MonoBehaviour {
 				return false;
 		}
 		return true;
+	}
+
+	public void  moveToNextQuestion(){
+		AssignQuestion(questionNumbersChosen[questionNumbersChosen.Length-1-questionFinished]);
 	}
 }
