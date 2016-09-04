@@ -6,10 +6,11 @@ public class TriviaGameLoop : MonoBehaviour {
 	public struct Question{
 		public string questionText;
 	}
-	public Question testQuestion;
+	public Question testQuestion;	
 	// Use this for initialization
 	void Start () {
-	
+		testQuestion.questionText = "What's your name ?";
+		print (testQuestion.questionText);
 	}
 	
 	// Update is called once per frame
