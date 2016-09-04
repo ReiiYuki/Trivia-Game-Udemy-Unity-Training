@@ -125,4 +125,8 @@ public class TriviaGameLoop : MonoBehaviour {
 			break;
 		}
 	}
+
+	public void restartLevel(){
+		Application.LoadLevel (Application.loadedLevelName);
+	}
 }
