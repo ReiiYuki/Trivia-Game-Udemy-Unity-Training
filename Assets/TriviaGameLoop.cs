@@ -21,6 +21,12 @@ public class TriviaGameLoop : MonoBehaviour {
 	private int currentQuestionIndex;
 	private int[] questionNumbersChosen = new int[5];
 	private int questionFinished;
+
+	public GameObject[] TriviaPanels;
+	public GameObject finalResultPanel;
+	public Text resultText;
+	private int numberOfCorrectAnswers;
+
 	// Use this for initialization
 	void Start () {
 
@@ -53,13 +59,20 @@ public class TriviaGameLoop : MonoBehaviour {
 
 	public void checkAnswer(int buttonNum){
 		if (buttonNum == currentQuestion.correctAnswerIndex) {
+			numberOfCorrectAnswers++;
 			print ("correct");
 		} else {
 			print ("incorrect");
 		}
-		if (questionFinished<questionNumbersChosen.Length-1){
-			moveToNextQuestion();
+		if (questionFinished < questionNumbersChosen.Length - 1) {
+			moveToNextQuestion ();
 			questionFinished++;
+		} else {
+			foreach (GameObject p in TriviaPanels) {
+				p.SetActive (false);
+			}
+			finalResultPanel.SetActive (true);
+			DisplayResults ();
 		}
 	}
 
@@ -85,5 +98,31 @@ public class TriviaGameLoop : MonoBehaviour {
 
 	public void  moveToNextQuestion(){
 		AssignQuestion(questionNumbersChosen[questionNumbersChosen.Length-1-questionFinished]);
+	}
+
+	void DisplayResults(){
+		switch (numberOfCorrectAnswers) {
+		case 5:
+			resultText.text = "5 / 5 GG EZ";
+			break;
+		case 4:
+			resultText.text = "4 / 5 Close Enough";
+			break;
+		case 3:
+			resultText.text = "3 / 5 At least you pass the half";
+			break;
+		case 2:
+			resultText.text = "2 / 5 You shall not pass!!!";
+			break;
+		case 1:
+			resultText.text = "1 / 5 Go to learn again...";
+			break;
+		case 0:
+			resultText.text = "0 / 5 Please start hiragana T-T";
+			break;
+		default:
+			resultText.text = "WTF happen!!!";
+			break;
+		}
 	}
 }
