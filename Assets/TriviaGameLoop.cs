@@ -7,10 +7,16 @@ public class TriviaGameLoop : MonoBehaviour {
 		public string questionText;
 	}
 	public Question testQuestion;	
+	public test varTest;
 	// Use this for initialization
 	void Start () {
 		testQuestion.questionText = "What's your name ?";
-		print (testQuestion.questionText);
+		varTest.age = 10;
+		test tempTest = varTest;
+		Question tempQuestion = testQuestion;
+		tempTest.age = 12;
+		tempQuestion.questionText = "What's your age?";
+		 print (testQuestion.questionText+varTest.age);
 	}
 	
 	// Update is called once per frame
