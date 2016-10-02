@@ -26,7 +26,7 @@ public class TriviaGameLoop : MonoBehaviour {
 	public GameObject finalResultPanel;
 	public Text resultText;
 	private int numberOfCorrectAnswers;
-
+	private bool allowSelection = true;
 	// Use this for initialization
 	void Start () {
 
@@ -58,21 +58,14 @@ public class TriviaGameLoop : MonoBehaviour {
 	}
 
 	public void checkAnswer(int buttonNum){
-		if (buttonNum == currentQuestion.correctAnswerIndex) {
-			numberOfCorrectAnswers++;
-			print ("correct");
-		} else {
-			print ("incorrect");
-		}
-		if (questionFinished < questionNumbersChosen.Length - 1) {
-			moveToNextQuestion ();
-			questionFinished++;
-		} else {
-			foreach (GameObject p in TriviaPanels) {
-				p.SetActive (false);
+		if (allowSelection) {
+			if (buttonNum == currentQuestion.correctAnswerIndex) {
+				numberOfCorrectAnswers++;
+				print ("correct");
+			} else {
+				print ("incorrect");
 			}
-			finalResultPanel.SetActive (true);
-			DisplayResults ();
+			StartCoroutine ("continueAfterFeedback");
 		}
 	}
 
@@ -128,5 +121,21 @@ public class TriviaGameLoop : MonoBehaviour {
 
 	public void restartLevel(){
 		Application.LoadLevel (Application.loadedLevelName);
+	}
+
+	IEnumerator continueAfterFeedback(){
+		allowSelection = false;
+		yield return new WaitForSeconds (1.0f);
+		if (questionFinished < questionNumbersChosen.Length - 1) {
+			moveToNextQuestion ();
+			questionFinished++;
+		} else {
+			foreach (GameObject p in TriviaPanels) {
+				p.SetActive (false);
+			}
+			finalResultPanel.SetActive (true);
+			DisplayResults ();
+		}
+		allowSelection = true;
 	}
 }
