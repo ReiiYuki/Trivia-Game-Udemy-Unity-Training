@@ -27,6 +27,7 @@ public class TriviaGameLoop : MonoBehaviour {
 	public Text resultText;
 	private int numberOfCorrectAnswers;
 	private bool allowSelection = true;
+	public GameObject feedbackText;
 	// Use this for initialization
 	void Start () {
 
@@ -61,9 +62,13 @@ public class TriviaGameLoop : MonoBehaviour {
 		if (allowSelection) {
 			if (buttonNum == currentQuestion.correctAnswerIndex) {
 				numberOfCorrectAnswers++;
+				feedbackText.GetComponent<Text> ().text = "Correct!";
+				feedbackText.GetComponent<Text> ().color = Color.green;
 				print ("correct");
 			} else {
 				print ("incorrect");
+				feedbackText.GetComponent<Text> ().text = "Wrong!";
+				feedbackText.GetComponent<Text> ().color = Color.red;
 			}
 			StartCoroutine ("continueAfterFeedback");
 		}
@@ -125,7 +130,9 @@ public class TriviaGameLoop : MonoBehaviour {
 
 	IEnumerator continueAfterFeedback(){
 		allowSelection = false;
+		feedbackText.SetActive (true);
 		yield return new WaitForSeconds (1.0f);
+		feedbackText.SetActive (false);
 		if (questionFinished < questionNumbersChosen.Length - 1) {
 			moveToNextQuestion ();
 			questionFinished++;
