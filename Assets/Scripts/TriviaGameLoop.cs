@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class TriviaGameLoop : MonoBehaviour {
 
+	//This is struct which use for setup question
 	public struct Question{
 		public string questionText;
 		public string[] answers;
@@ -13,6 +14,7 @@ public class TriviaGameLoop : MonoBehaviour {
 			this.correctAnswerIndex = correctAnswerIndex;
 		}
 	}
+	//Current Question
 	private Question currentQuestion;	
 	public Button[] answerButtons;
 	public Text questionText;
@@ -47,9 +49,9 @@ public class TriviaGameLoop : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+		quitGame ();
 	}
-
+	//Setting up the question to interface
 	void AssignQuestion(int questionNum){
 		currentQuestion = questions[questionNum];
 		questionText.text = currentQuestion.questionText;
@@ -57,7 +59,8 @@ public class TriviaGameLoop : MonoBehaviour {
 			answerButtons [i].GetComponentInChildren<Text>().text = currentQuestion.answers [i];
 		}
 	}
-
+	//Give feedback for answer
+	//Move to next question
 	public void checkAnswer(int buttonNum){
 		if (allowSelection) {
 			if (buttonNum == currentQuestion.correctAnswerIndex) {
@@ -73,7 +76,7 @@ public class TriviaGameLoop : MonoBehaviour {
 			StartCoroutine ("continueAfterFeedback");
 		}
 	}
-
+	//Choosing number of the trivia game
 	void ChooseQuestions(){
 		for (int i = 0; i < questionNumbersChosen.Length; i++) {
 			int questionNum = Random.Range (0, questions.Length);
@@ -85,7 +88,7 @@ public class TriviaGameLoop : MonoBehaviour {
 		}
 		currentQuestionIndex = Random.Range (0, questions.Length);
 	}
-
+	//checking see if random number already chosen
 	bool NumberNotContained(int[] numbers,int num){	
 		for (int i = 0; i < numbers.Length; i++) {
 			if (numbers [i] == num)
@@ -93,11 +96,11 @@ public class TriviaGameLoop : MonoBehaviour {
 		}
 		return true;
 	}
-
+	//assign new question using next question number
 	public void  moveToNextQuestion(){
 		AssignQuestion(questionNumbersChosen[questionNumbersChosen.Length-1-questionFinished]);
 	}
-
+	//set result of score to interface
 	void DisplayResults(){
 		switch (numberOfCorrectAnswers) {
 		case 5:
@@ -123,11 +126,11 @@ public class TriviaGameLoop : MonoBehaviour {
 			break;
 		}
 	}
-
+	//restart level
 	public void restartLevel(){
 		Application.LoadLevel (Application.loadedLevelName);
 	}
-
+	//pause before move to next question
 	IEnumerator continueAfterFeedback(){
 		allowSelection = false;
 		feedbackText.SetActive (true);
@@ -144,5 +147,11 @@ public class TriviaGameLoop : MonoBehaviour {
 			DisplayResults ();
 		}
 		allowSelection = true;
+	}
+	//Check input quit game
+	void quitGame(){
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit ();
+		}
 	}
 }
