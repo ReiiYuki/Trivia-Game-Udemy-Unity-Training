@@ -32,7 +32,8 @@ public class TriviaGameLoop : MonoBehaviour {
 	public GameObject feedbackText;
 	// Use this for initialization
 	void Start () {
-
+		for (int i = 0; i < questionNumbersChosen.Length; i++)
+			questionNumbersChosen [i] = -1;
 		questions [0] = new Question ("a", new string[]{"お","た","あ","ろ","の" },2);
 		questions [1] = new Question ("も", new string[]{"chi","tsu","ha","ma","mo" },4);
 		questions [2] = new Question ("wa", new string[]{"ね","れ","わ","か","ら" },2);
